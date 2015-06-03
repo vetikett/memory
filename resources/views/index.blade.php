@@ -9,17 +9,20 @@
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	
-	<link rel="stylesheet" href="normalize.css">
-	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/main.css">
 	
-	<script src="jquery-2.1.1.js"></script>
-	<script src="main.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="js/main.js" type="text/javascript"></script>
 </head>
 <body>
+
+@include('partials.fb')
+
 	<div class="wrapper">
 		<div class="victory-page">
 			<div class="victory-alert">
-				<img src="trophy.png" alt="trophy">
+				<img src="images/trophy.png" alt="trophy">
 				<p>Congratulations!</p>
 				<p>You did it in <span class="totalClicksCounter"></span> clicks!</p>
 			</div>
@@ -48,7 +51,11 @@
 			</div>
 		</div>
 		<div class="container">
-			
+            <fb:login-button scope="public_profile,email,user_photos" onlogin="checkLoginState();">
+            </fb:login-button>
+
+            <div id="status">
+            </div>
 			<input id="start-button" type="button" name="start_button" value="Shuffle and Start">
 
 			<div class="row">

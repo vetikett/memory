@@ -59,7 +59,7 @@ $(document).ready(function(){
 		for (var i = 0; i < squares.length; i++) {
 			squares[i]
 			.getElementsByClassName('content')[0]
-			.innerHTML = "<img src='pics/" + takenSlots[i] + "'" + "alt='" + takenSlots[i] + "'" + "/>";
+			.innerHTML = "<img src='images/pics/" + takenSlots[i] + "'" + "alt='" + takenSlots[i] + "'" + "/>";
 		};
 	}
 	
@@ -90,16 +90,16 @@ $(document).ready(function(){
 		
 		if ( $(pic1).find('img').first().attr('alt') == $(pic2).find('img').first().attr('alt') &&  
 			$(pic1).attr('id') != $(pic2).attr('id') ) {
-			return true;
+				return true;
+			}
 		}
-	}
 
 	// ==== Compare values END ==== 
 
 	var highscore;	
-	$.get('highscore.json', function(data) {
+	$.get('highscore', function(data) {
 		$('#highscore').text(data.highscore);
-		highscore = data.highscore;
+			highscore = data.highscore;
 	});
 
 	$('#start-button').on('click', function() {		// init click	
@@ -191,13 +191,12 @@ $(document).ready(function(){
 
 				if (completedSlots.length == squares.length) {  // all slots have been shown and game is done.
 
+                    $.post('highscore', {highscore: totalClicksCounter}, function(data) {
+                        console.log(data);
+                    });
 					if ( highscore == 0 || totalClicksCounter < highscore ) {		// set highscore
 						
-						$.post('handle-highscore.php', {highscore: totalClicksCounter}, function() {
-
-
-						});
-						$.get('highscore.json', function(data) {
+						$.get('highscore', function(data) {
 							highscore = data.highscore;
 							$('#highscore').text(data.highscore);
 						});
